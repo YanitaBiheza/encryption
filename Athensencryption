@@ -1,0 +1,56 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+
+string affineCipherEncrypt(string text, int a, int b) {
+    string result = "";
+    for (int i = 0; i < text.length(); i++) {
+        if (isupper(text[i])) {
+            result += char((a * (text[i] - 'A') + b) % 26 + 'A');
+        } else {
+            result += char((a * (text[i] - 'a') + b) % 26 + 'a');
+        }
+    }
+    return result;
+}
+
+string affineCipherDecrypt(string text, int a, int b) {
+    string result = "";
+    int a_inv = -1;
+    for (int i = 0; i < 26; i++) {
+        int flag = (a * i) % 26;
+        if (flag == 1) {
+            a_inv = i;
+            break;
+        }
+    }
+    if (a_inv == -1) {
+        return "Not Possible";
+    } else {
+        for (int i = 0; i < text.length(); i++) {
+            if (isupper(text[i])) {
+                result += char((a_inv * (text[i] - 'A' - b + 26)) % 26 + 'A');
+            } else {
+                result += char((a_inv * (text[i] - 'a' - b + 26)) % 26 + 'a');
+            }
+        }
+        return result;
+    }
+}
+
+int main() {
+    string plaintext;
+    std::cout << "input your message without spaces" << std::endl;
+    std::cin >> plaintext;
+    int a = 5, b = 7;
+
+    cout << "Original Text: " << plaintext << endl;
+
+    string ciphertext = affineCipherEncrypt(plaintext, a, b);
+    cout << "Encrypted Text: " << ciphertext << endl;
+
+    string decryptedtext = affineCipherDecrypt(ciphertext, a, b);
+    cout << "Decrypted Text: " << decryptedtext << endl;
+
+    return 0;
+}
