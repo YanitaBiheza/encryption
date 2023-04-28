@@ -4,11 +4,11 @@
 
 int main() {
     std::string input_string;
-    std::cout << "input your message" << '\n';
+    std::cout << "input your message without spaces" << '\n';
     std::cin >> input_string;
 
     std::string keyword;
-    std::cout << "input your key" << '\n';
+    std::cout << "input your key without spaces" << '\n';
     std::cin >> keyword;
 
     std::bitset<8> key_binary_array[input_string.length()];
