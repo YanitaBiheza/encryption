@@ -1,0 +1,49 @@
+#include <bitset>
+#include <iostream>
+#include <string>
+
+int main() {
+    std::string input_string;
+    std::cout << "input your message" << '\n';
+    std::cin >> input_string;
+
+    std::string keyword;
+    std::cout << "input your key" << '\n';
+    std::cin >> keyword;
+
+    std::bitset<8> key_binary_array[input_string.length()];
+    for (int j = 0; j < input_string.length(); j++) {
+        key_binary_array[j] = keyword[j % keyword.length()];
+    }
+
+//    for (int j = 0; j < input_string.length(); j++) {
+//        std::cout << key_binary_array[j] << '\n';
+//    }
+
+    std::bitset<8> binary_representation;
+
+    std::bitset<8> binary_array[input_string.length()];
+    int i = 0;
+    for (char c : input_string) {
+        binary_representation = std::bitset<8>(c);
+        binary_array[i] = binary_representation;
+        i++;
+        //std::cout << c << " in binary: " << binary_representation.to_string() << '\n';
+    }
+
+//    for (int j = 0; j < input_string.length(); j++) {
+//        std::cout << binary_array[j] << '\n';
+//    }
+
+    std::bitset<8> result[input_string.length()];
+
+    for (int j = 0; j < input_string.length(); j++) {
+        result[j] = binary_array[j]^key_binary_array[j];
+    }
+
+        for (int j = 0; j < input_string.length(); j++) {
+        std::cout << "encryption" << result[j] << '\n';
+    }
+
+    return 0;
+}
